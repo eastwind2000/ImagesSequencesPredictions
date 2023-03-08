@@ -35,16 +35,16 @@ while i < NUMBER:
 # step =1
 SEQUENCE = SEQUENCE.reshape(NUMBER, WIDTH, HEIGHT, 1)
 # step =2
-SEQUENCE_2 = []
-for i in range(int(NUMBER / 2)):
-    SEQUENCE_2.append(SEQUENCE[2 * i])
+# SEQUENCE_2 = []
+# for i in range(int(NUMBER / 2)):
+#     SEQUENCE_2.append(SEQUENCE[2 * i])
 
 # step = 3
-SEQUENCE_3 = []
-for i in range(int(NUMBER / 3)):
-    SEQUENCE_3.append(SEQUENCE[3 * i])
+# SEQUENCE_3 = []
+# for i in range(int(NUMBER / 3)):
+#     SEQUENCE_3.append(SEQUENCE[3 * i])
 
-def get_sequence()
+# def get_sequence() #! useless or wrong code.
 
 
 SEQUENCE = SEQUENCE.reshape(NUMBER, WIDTH, HEIGHT, 1)
@@ -80,26 +80,24 @@ seq.add(BatchNormalization())
 
 seq.add(Conv3D(filters=1, kernel_size=(3, 3, 3), activation='sigmoid', padding='same', data_format='channels_last'))
 
-# sgd = optimizers.SGD(lr=0.01, clipvalue=0.5)
+sgd = optimizers.SGD(lr=0.01, clipvalue=0.5)
 
 # seq.compile(loss='binary_crossentropy', optimizer='adadelta')
-'''
+
 seq.compile(loss='mean_squared_error', optimizer='adadelta')
 
 seq.fit(BASIC_SEQUENCE[:10], NEXT_SEQUENCE[:10], batch_size=32,
         epochs=2, validation_split=0.05)
 
 
-'''
-
-parallel_model = multi_gpu_model(seq, gpus=4)
-sgd = optimizers.SGD(lr=0.01, clipnorm=1)
+# parallel_model = multi_gpu_model(seq, gpus=4)
+# sgd = optimizers.SGD(lr=0.01, clipnorm=1)
 #rmsprop = optimizers.RMSprop(lr=0.001, rho=0.9, epsilon=1e-06)
 #adadelta_ = optimizers.Adadelta(lr=1.0, rho=0.95, epsilon=1e-06)
-parallel_model.compile(loss='mean_squared_error', optimizer='adadelta')
+# parallel_model.compile(loss='mean_squared_error', optimizer='adadelta')
 
 
-parallel_model.fit(BASIC_SEQUENCE[:1000], NEXT_SEQUENCE[:1000], batch_size=10, epochs=10, validation_split=0.05)
+# parallel_model.fit(BASIC_SEQUENCE[:1000], NEXT_SEQUENCE[:1000], batch_size=10, epochs=10, validation_split=0.05)
 
 
 seq.save('nice_model.h5')
